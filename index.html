@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wife Referral Dot Com</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            font-family: 'Libre Baskerville', Georgia, serif;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .typewriter-text {
+            font-size: 1.75rem;
+            line-height: 1.9;
+            color: #e8e4e0;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #b8956e;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: blink 1s infinite;
+        }
+
+        .cursor.hidden {
+            display: none;
+        }
+
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+
+        .instagram-link {
+            color: #b8956e;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .instagram-link:hover {
+            border-bottom-color: #b8956e;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1.5rem;
+            }
+
+            .typewriter-text {
+                font-size: 1.35rem;
+                line-height: 1.8;
+            }
+
+        }
+
+        @media (max-width: 400px) {
+            .typewriter-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="typewriter-text">
+            <span id="text"></span><span class="cursor" id="cursor"></span>
+        </p>
+    </div>
+
+    <script>
+        const text = "Hi, my name is Trey! If you refer me to my future wife, I will pay you $10,000 on our wedding day. Interested in learning more?\n\nCheck out my Instagram.";
+        const textElement = document.getElementById('text');
+        const cursorElement = document.getElementById('cursor');
+
+        let charIndex = 0;
+        const baseSpeed = 90;
+        const initialDelay = 800;
+
+        function getTypingDelay() {
+            const variation = Math.random() * 50 - 25;
+            return baseSpeed + variation;
+        }
+
+        function typeCharacter() {
+            if (charIndex < text.length) {
+                const currentChar = text.charAt(charIndex);
+
+                if (currentChar === '\n') {
+                    textElement.innerHTML += '<br>';
+                } else {
+                    textElement.innerHTML += currentChar;
+                }
+                charIndex++;
+
+                let delay = getTypingDelay();
+
+                if (currentChar === '.' || currentChar === '?' || currentChar === '!') {
+                    delay += 400;
+                } else if (currentChar === ',') {
+                    delay += 200;
+                } else if (currentChar === '\n') {
+                    delay += 100;
+                }
+
+                setTimeout(typeCharacter, delay);
+            } else {
+                cursorElement.classList.add('hidden');
+                const finalText = textElement.innerHTML;
+                textElement.innerHTML = finalText.replace(
+                    'my Instagram',
+                    '<a href="https://www.instagram.com/trey_wall/" target="_blank" rel="noopener noreferrer" class="instagram-link">my Instagram</a>'
+                );
+            }
+        }
+
+        setTimeout(typeCharacter, initialDelay);
+    </script>
+</body>
+</html>
